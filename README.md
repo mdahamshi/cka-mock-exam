@@ -32,6 +32,7 @@ This kit assumes you already have a working Kubernetes cluster. Specifically:
 |------|-------------|
 | `setup-cka-mock-exam.sh` | Environment setup script — run once before starting the exam |
 | `cka-mock-exam.md` | The 17 exam questions + collapsed answer key |
+| `Vagrantfile` | Vagrantfile for virsh , see [kodekloud guide](https://github.com/kodekloudhub/certified-kubernetes-administrator-course/blob/master/kubeadm-clusters/virtualbox/docs/01-prerequisites.md) for more info|
 | `README.md` | This file |
 
 ---
