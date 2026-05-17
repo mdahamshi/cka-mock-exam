@@ -136,4 +136,3 @@ export now="--force --grace-period 0"  # e.g.: k delete pod pod1 $now
 
 ---
 
-*Prepared for Mohammad Dahamshi — CKA preparation 2026*
