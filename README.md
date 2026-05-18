@@ -30,8 +30,10 @@ This kit assumes you already have a working Kubernetes cluster. Specifically:
 
 | File | Description |
 |------|-------------|
-| `setup-cka-mock-exam | -2.sh` | Environment setup script — run once before starting the exam |
-| `cka-mock-exam | -2.md` | The 17 exam questions + collapsed answer key |
+| `setup-cka-mock-exam.sh` | Environment setup script — run once before starting the exam |
+| `cka-mock-exam.md` | The 17 exam questions + collapsed answer key |
+| `setup-cka-mock-exam-2.sh` | Environment setup script — run once before starting the exam 2 |
+| `cka-mock-exam-2.md` | The 17 exam 2 questions + collapsed answer key |
 | `Vagrantfile` | Vagrantfile for virsh , see [kodekloud guide](https://github.com/kodekloudhub/certified-kubernetes-administrator-course/blob/master/kubeadm-clusters/virtualbox/docs/01-prerequisites.md) for more info|
 | `README.md` | This file |
 | `cleanup-cka-exam.sh` | A clean up script, run with cation, it dletes all resource except kubernetes defaults|
