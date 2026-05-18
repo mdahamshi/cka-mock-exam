@@ -46,7 +46,7 @@ log "Cluster nodes: $NODES"
 sudo mkdir -p /opt/course
 sudo chown $USER:$USER /opt/course
 # Create output directories
-for i in 3 5 7 8 10 11 14 15 16 17; do
+for i in 3 5 7 8 10 11 12 13 1 2 14 15 16 17; do
   mkdir -p /opt/course/$i
 done
 log "Created /opt/course/N directories"
@@ -247,6 +247,7 @@ log "Q9: No pre-setup needed — you will stop the scheduler and schedule manual
 hdr "Q10 | PV Dynamic Provisioning + Job"
 
 kubectl create namespace project-bern --dry-run=client -o yaml | kubectl apply -f - &>/dev/null
+kubectl apply -f https://raw.githubusercontent.com/rancher/local-path-provisioner/master/deploy/local-path-storage.yaml
 mkdir -p /opt/course/10
 
 cat <<'EOF' > /opt/course/10/backup.yaml

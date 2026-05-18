@@ -180,6 +180,8 @@ Valid types: `not-installed`, `process`, `static-pod`, `pod`
 ## Question 10 | Dynamic PV Provisioning + Job (6%)
 **Node: `cp`**
 
+**All work** should be in namespace `project-bern`.
+
 1. Create a **StorageClass** named `local-backup`:
    - Provisioner: `rancher.io/local-path`
    - `volumeBindingMode: WaitForFirstConsumer`
