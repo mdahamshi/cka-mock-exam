@@ -30,10 +30,11 @@ This kit assumes you already have a working Kubernetes cluster. Specifically:
 
 | File | Description |
 |------|-------------|
-| `setup-cka-mock-exam.sh` | Environment setup script — run once before starting the exam |
-| `cka-mock-exam.md` | The 17 exam questions + collapsed answer key |
+| `setup-cka-mock-exam | -2.sh` | Environment setup script — run once before starting the exam |
+| `cka-mock-exam | -2.md` | The 17 exam questions + collapsed answer key |
 | `Vagrantfile` | Vagrantfile for virsh , see [kodekloud guide](https://github.com/kodekloudhub/certified-kubernetes-administrator-course/blob/master/kubeadm-clusters/virtualbox/docs/01-prerequisites.md) for more info|
 | `README.md` | This file |
+| `cleanup-cka-exam.sh` | A clean up script, run with cation, it dletes all resource except kubernetes defaults|
 
 ---
 
@@ -111,6 +112,22 @@ export now="--force --grace-period 0"  # e.g.: k delete pod pod1 $now
 **Passing score: 66%**
 
 ---
+**New topics covered (second exam) (directly from the killer.sh B simulator):**
+
+| # | Topic | What makes it different |
+|---|-------|------------------------|
+| 1 | DNS FQDNs | Headless service, pod hostname/subdomain, pod-IP DNS format |
+| 2 | Static Pod + NodePort | Manual manifest placement in manifests dir |
+| 3 | Kubelet cert inspection | Client vs server cert, openssl, Extended Key Usage |
+| 4 | Cross-pod ReadinessProbe | wget-based readiness, Service-dependent readiness |
+| 5 | kubectl sort scripts | `--sort-by` flags, bash scripts |
+| 6 | Fix broken kubelet | Wrong binary path in systemd drop-in |
+| 7 | etcd version + snapshot | exec into etcd pod for version, etcdctl snapshot |
+| 8 | Controlplane component types | process vs static-pod vs pod, coredns as deployment |
+| 9 | Kill scheduler + manual schedule | `nodeName` field, replace --force |
+| 10 | Dynamic PV + StorageClass | `rancher.io/local-path`, `Retain` policy, Job PVC |
+| 17 | Kustomize + CRD + RBAC fix | Log-driven debugging, fix Role, add CR |
+
 
 ## Notes
 
