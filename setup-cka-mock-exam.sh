@@ -29,6 +29,8 @@ fi
 NODES=$(kubectl get nodes --no-headers | awk '{print $1}' | tr '\n' ' ')
 log "Cluster nodes detected: $NODES"
 
+sudo mkdir -p /opt/course
+sudo chown $USER:$USER /opt/course
 # Create output directories on cp
 mkdir -p /opt/course/{1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17}
 log "Created /opt/course/N directories for all questions"

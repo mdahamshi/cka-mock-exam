@@ -43,6 +43,8 @@ fi
 NODES=$(kubectl get nodes --no-headers | awk '{print $1}' | tr '\n' ' ')
 log "Cluster nodes: $NODES"
 
+sudo mkdir -p /opt/course
+sudo chown $USER:$USER /opt/course
 # Create output directories
 for i in 3 5 7 8 10 11 14 15 16 17; do
   mkdir -p /opt/course/$i
