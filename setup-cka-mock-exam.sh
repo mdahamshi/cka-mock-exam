@@ -479,24 +479,6 @@ EOF
 
 log "Q17: Kustomize overlay structure at /opt/course/17/api-gateway/"
 
-# ── Aliases setup ─────────────────────────────────────────────
-hdr "Setting up exam aliases"
-
-ALIAS_BLOCK='
-# CKA Mock Exam aliases
-alias k=kubectl
-export do="--dry-run=client -o yaml"
-export now="--force --grace-period 0"
-source <(kubectl completion bash)
-complete -F __start_kubectl k
-'
-
-echo "$ALIAS_BLOCK" >> ~/.bashrc
-# Apply immediately in current shell context
-eval "$ALIAS_BLOCK" 2>/dev/null || true
-
-log "Aliases added to ~/.bashrc (k, do, now) + kubectl completion"
-log "Run: source ~/.bashrc"
 
 # ── Summary ───────────────────────────────────────────────────
 hdr "Setup Complete!"

@@ -597,20 +597,6 @@ kubectl create namespace operator-prod --dry-run=client -o yaml | kubectl apply 
 kubectl kustomize /opt/course/17/operator/prod | kubectl apply -f - &>/dev/null || warn "Q17 operator-prod deploy had warnings (ok if CRDs just created)"
 log "Q17: Kustomize operator structure at /opt/course/17/operator/"
 
-# ── Aliases ───────────────────────────────────────────────────
-hdr "Shell aliases"
-
-grep -q "CKA Mock Exam 2" ~/.bashrc || cat >> ~/.bashrc <<'ALIASES'
-
-# CKA Mock Exam 2 aliases
-alias k=kubectl
-export do="--dry-run=client -o yaml"
-export now="--force --grace-period 0"
-source <(kubectl completion bash)
-complete -F __start_kubectl k
-ALIASES
-
-log "Aliases added to ~/.bashrc — run: source ~/.bashrc"
 
 # ── Summary ───────────────────────────────────────────────────
 hdr "Setup Complete!"
