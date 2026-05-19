@@ -69,7 +69,6 @@ hdr "Q2 | Gateway API - migrate Ingress to Gateway+HTTPRoute"
 
 kubectl create namespace gateway-lab --dry-run=client -o yaml | kubectl apply -f - &>/dev/null
 
-kubectl delete validatingwebhookconfiguration ingress-nginx-admission
 
 # Deploy a backend app + service
 cat <<'EOF' | kubectl apply --validate=false -f - &>/dev/null
