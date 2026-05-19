@@ -67,6 +67,10 @@ log "Q1: helm + bitnami repo ready. Namespace helm-lab created."
 # ---- Q2 | Gateway API + Ingress migration -------------------
 hdr "Q2 | Gateway API - migrate Ingress to Gateway+HTTPRoute"
 
+log "Q2: installing gateway api"
+
+kubectl apply --server-side -f https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.5.0/standard-install.yaml
+
 kubectl create namespace gateway-lab --dry-run=client -o yaml | kubectl apply -f - &>/dev/null
 
 
@@ -130,7 +134,6 @@ kubectl -n gateway-lab create secret tls web-tls \
 
 log "Q2: Ingress 'web-ingress', Deployment 'web-backend', Service 'web-backend-svc' in gateway-lab"
 log "Q2: TLS secret 'web-tls' created in gateway-lab"
-warn "Q2: Gateway API CRDs may need installing — check: kubectl get crd | grep gateway"
 
 # ---- Q3 | PriorityClass + Deployment ------------------------
 hdr "Q3 | PriorityClass"
