@@ -263,7 +263,8 @@ spec:
 EOF
 kubectl create secret tls web-tls -n nginx-lab \
   --cert=/etc/kubernetes/pki/apiserver.crt \
-  --key=/etc/kubernetes/pki/apiserver.key
+  --key=/etc/kubernetes/pki/apiserver.key \
+  --dry-run=client -o yaml | kubectl apply -f -
 log "Q5: ConfigMap 'nginx-config' with TLSv1.3 only in nginx-lab (task: also enable TLSv1.2)"
 
 # ---- Q6 | Broken kube-apiserver (wrong etcd endpoint) ------
@@ -371,7 +372,7 @@ log "Q7: Deployments frontend/backend-api/cache in netpol-lab"
 hdr "Q8 | StorageClass + dynamic PV"
 
 kubectl create namespace storage-lab --dry-run=client -o yaml | kubectl apply -f - &>/dev/null
-
+kubectl apply -f https://raw.githubusercontent.com/rancher/local-path-provisioner/master/deploy/local-path-storage.yaml
 # Pre-create a PV for the matching task
 cat <<'EOF' | kubectl apply -f - &>/dev/null
 apiVersion: v1

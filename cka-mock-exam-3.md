@@ -149,8 +149,7 @@ kubectl -n nginx-lab exec deploy/nginx-tls -- nginx -T 2>/dev/null | grep ssl_pr
 
 > **⚠️ Break the cluster BEFORE starting your timer:**
 > ```bash
-> sudo sed -i 's/--etcd-servers=https:\/\/127.0.0.1:2379/--etcd-servers=https:\/\/127.0.0.1:1234/' \
->   /etc/kubernetes/manifests/kube-apiserver.yaml
+> sudo sed -i 's|--etcd-servers=https://127.0.0.1:2379|--etcd-servers=https://127.0.0.1:1234/|'  /etc/kubernetes/manifests/kube-apiserver.yaml
 > # Wait ~30s then confirm it's broken:
 > kubectl get nodes   # should fail
 > ```
@@ -179,17 +178,17 @@ The kube-apiserver is not starting. The kubelet log shows it is crashing.
 
 In Namespace `netpol-lab`, three Deployments exist:
 - `frontend` (label `app: frontend`)
-- `backend-api` (label `app: backend-api`) — Service `backend-api-svc` on port 8080
+- `backend-api` (label `app: backend-api`) — Service `backend-api-svc` on port 80
 - `cache` (label `app: cache`) — Service `cache-svc` on port 6379
 
 Create **two NetworkPolicies**:
 
 **Policy 1** — `allow-frontend-to-backend`:
-- Allow `frontend` pods to reach `backend-api` pods on port **8080**
+- Allow `frontend` pods to reach `backend-api` pods on port **80**
 - Deny all other ingress to `backend-api`
 
 **Policy 2** — `allow-backend-to-cache`:
-- Allow `backend-api` pods to reach `cache` pods on port **6379**
+- Allow `backend-api` pods to reach `cache` pods on port **80**
 - Deny all other ingress to `cache`
 
 Verify:
