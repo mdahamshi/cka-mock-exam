@@ -199,6 +199,10 @@ spec:
       containers:
       - name: main
         image: nginx:1-alpine
+        command:
+        - sh
+        - -c
+        - while true;do date >> /var/log/nginx/access.log;sleep 1;done
         # No log sidecar yet — that's the task
 EOF
 log "Q4: Deployment 'app-logger' in logging-lab (no sidecar yet — your task)"
@@ -247,11 +251,19 @@ spec:
         volumeMounts:
         - name: config
           mountPath: /etc/nginx/conf.d
+        - name: tls
+          mountPath: /etc/nginx/tls
       volumes:
       - name: config
         configMap:
           name: nginx-config
+      - name: tls
+        secret:
+          secretName: web-tls
 EOF
+kubectl create secret tls web-tls -n nginx-lab \
+  --cert=/etc/kubernetes/pki/apiserver.crt \
+  --key=/etc/kubernetes/pki/apiserver.key
 log "Q5: ConfigMap 'nginx-config' with TLSv1.3 only in nginx-lab (task: also enable TLSv1.2)"
 
 # ---- Q6 | Broken kube-apiserver (wrong etcd endpoint) ------
