@@ -89,7 +89,7 @@ delete_ns_with_fallback() {
   log "Deleting namespace: $ns ..."
 
   kubectl delete namespace "$ns" --ignore-not-found \
-    --wait=true --timeout=60s 2>/dev/null && \
+    --wait=true --timeout=5s 2>/dev/null && \
     log "Namespace $ns deleted cleanly" && return
 
   # Still exists - remove finalizers
