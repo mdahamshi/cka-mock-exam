@@ -179,7 +179,7 @@ The kube-apiserver is not starting. The kubelet log shows it is crashing.
 In Namespace `netpol-lab`, three Deployments exist:
 - `frontend` (label `app: frontend`)
 - `backend-api` (label `app: backend-api`) — Service `backend-api-svc` on port 80
-- `cache` (label `app: cache`) — Service `cache-svc` on port 6379
+- `cache` (label `app: cache`) — Service `cache-svc` on port 80
 
 Create **two NetworkPolicies**:
 
@@ -664,7 +664,7 @@ spec:
         matchLabels:
           app: frontend
     ports:
-    - port: 8080
+    - port: 80 #pod port
 ---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
@@ -683,7 +683,7 @@ spec:
         matchLabels:
           app: backend-api
     ports:
-    - port: 6379
+    - port: 80  #pod port
 ```
 
 ---
@@ -1040,6 +1040,3 @@ kubectl -n deploy-lab get deploy myapp -o jsonpath='{.spec.template.spec.contain
 **Passing score: 66%**
 
 ---
-
-*Mock exam 3 prepared for Mohammad Dahamshi — CKA preparation 2026*
-*Based on real exam reports from candidates who sat the post-Feb 2025 updated CKA*
