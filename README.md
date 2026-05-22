@@ -32,8 +32,10 @@ This kit assumes you already have a working Kubernetes cluster. Specifically:
 |------|-------------|
 | `setup-cka-mock-exam.sh` | Environment setup script — run once before starting the exam |
 | `cka-mock-exam.md` | The 17 exam questions + collapsed answer key |
-| `setup-cka-mock-exam-2.sh` | Environment setup script — run once before starting the exam 2 |
+| `setup-cka-mock-exam-2.sh` | Environment setup script — run once before starting exam 2 |
 | `cka-mock-exam-2.md` | The 17 exam 2 questions + collapsed answer key |
+| `setup-cka-mock-exam-3.sh` | Environment setup script — run once before starting exam 3 |
+| `cka-mock-exam-3.md` | The 17 exam 3 questions + collapsed answer key |
 | `Vagrantfile` | Vagrantfile for virsh , see [kodekloud guide](https://github.com/kodekloudhub/certified-kubernetes-administrator-course/blob/master/kubeadm-clusters/virtualbox/docs/01-prerequisites.md) for more info|
 | `README.md` | This file |
 | `cleanup-cka-exam.sh` | A clean up script, run with cation, it dletes all resource except kubernetes defaults|
@@ -91,6 +93,8 @@ export now="--force --grace-period 0"  # e.g.: k delete pod pod1 $now
 
 ## Question Topics & Domain Coverage
 
+### Exam 1
+
 | # | Topic | CKA Domain | Weight |
 |---|-------|-----------|--------|
 | 1 | Kubeconfig context extraction | Cluster Architecture | 4% |
@@ -114,7 +118,10 @@ export now="--force --grace-period 0"  # e.g.: k delete pod pod1 $now
 **Passing score: 66%**
 
 ---
-**New topics covered (second exam) (directly from the killer.sh B simulator):**
+
+### Exam 2
+
+**New topics covered (directly from the killer.sh B simulator):**
 
 | # | Topic | What makes it different |
 |---|-------|------------------------|
@@ -130,17 +137,51 @@ export now="--force --grace-period 0"  # e.g.: k delete pod pod1 $now
 | 10 | Dynamic PV + StorageClass | `rancher.io/local-path`, `Retain` policy, Job PVC |
 | 17 | Kustomize + CRD + RBAC fix | Log-driven debugging, fix Role, add CR |
 
+---
+
+### Exam 3 (Kubernetes 1.35 | Post-Feb 2025 Curriculum)
+
+| # | Topic | CKA Domain | Weight |
+|---|-------|-----------|--------|
+| 1 | Helm template + install with values | Cluster Architecture | 6% |
+| 2 | Gateway API — HTTPRoute + TLS, migrate from Ingress | Networking | 8% |
+| 3 | PriorityClass creation + deployment patch | Workloads | 5% |
+| 4 | Sidecar container + shared emptyDir volume | Workloads | 6% |
+| 5 | ConfigMap edit — nginx TLS protocol update | Workloads | 4% |
+| 6 | Troubleshoot kube-apiserver (wrong etcd endpoint) | Troubleshooting | 8% |
+| 7 | NetworkPolicy — multi-tier ingress rules | Networking | 6% |
+| 8 | StorageClass + static PV bind + dynamic provisioning | Storage | 6% |
+| 9 | PodDisruptionBudget | Workloads | 4% |
+| 10 | CronJob + manual Job trigger | Workloads | 5% |
+| 11 | Troubleshoot broken Service (selector + port) | Troubleshooting | 5% |
+| 12 | RBAC ClusterRole aggregation | Cluster Architecture | 5% |
+| 13 | Deployment rollout history + rollback | Workloads | 5% |
+| 14 | Init container + readinessProbe | Workloads | 5% |
+| 15 | Node drain with PDB constraint | Cluster Architecture | 5% |
+| 16 | ResourceQuota + LimitRange + default injection | Workloads | 5% |
+| 17 | Helm template save + Kustomize image patch | Cluster Architecture | 7% |
+
+**Passing score: 66%**
+
+> **Note for Q6:** Break the apiserver **before** starting your timer:
+> ```bash
+> sudo sed -i 's|--etcd-servers=https://127.0.0.1:2379|--etcd-servers=https://127.0.0.1:1234/|' \
+>   /etc/kubernetes/manifests/kube-apiserver.yaml
+> ```
+
+---
 
 ## Notes
 
-- **Question 12 (cluster upgrade)** requires a real version mismatch on `node01` to be fully
+- **Question 12 (cluster upgrade, Exam 1)** requires a real version mismatch on `node01` to be fully
   realistic. If your nodes all run the same version, you can still practice the drain/uncordon
   workflow and the `kubeadm upgrade node` command flow.
-- **Question 15 (Ingress)** requires an IngressClass and Ingress controller to be installed
+- **Question 15 (Ingress, Exam 1)** requires an IngressClass and Ingress controller to be installed
   (e.g. ingress-nginx). If none is present, the Ingress resource can still be created and
   inspected — the address field will just remain empty.
-- All questions are designed to work with **Kubernetes v1.29+**. The exam is currently based
-  on **v1.34**.
+- **Question 2 (Gateway API, Exam 3)** requires Gateway API CRDs. The setup script installs them,
+  or they can be applied manually from the question instructions.
+- All questions are designed to work with **Kubernetes v1.29+**. Exam 3 is based on **v1.35**.
 
 ---
 
@@ -154,4 +195,3 @@ export now="--force --grace-period 0"  # e.g.: k delete pod pod1 $now
 - Always verify your work: `kubectl get`, `kubectl describe`, `kubectl logs`.
 
 ---
-
